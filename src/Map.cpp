@@ -20,8 +20,7 @@ StatusCode Map::setCell(Cell* cell, int x, int y) {
     
     int index = getIndexFromPosition(x, y);
 
-    allCells[index].cost = cell->cost; 
-    allCells[index].cellType = cell->cellType; 
+    allCells[index] = *cell;
 
     return StatusCode::SUCCESS;
 }
@@ -48,6 +47,5 @@ Map::Map(int width, int height) {
 }
 
 Map::~Map() {
-    std::cout << "Freeing" << std::endl;
     free(allCells);
 }

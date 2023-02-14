@@ -7,15 +7,14 @@
 
 class Map {
     public:
-        StatusCode setCell(Cell* cell, int x, int y);
-        StatusCode getCell(Cell** cell, int x, int y); 
+        int width;
+        int height;
+        StatusCode setCell(Cell* cell, int x, int y) const;
+        StatusCode getCell(Cell** cell, int x, int y) const; 
         Map(int width, int height); 
         ~Map();
     private: 
-        int width;
-        int height;
         Cell* allCells;
-        inline int getIndexFromPosition(int x, int y);
-        inline bool positionIsInsideBounds(int x, int y);
+        inline bool positionIsInsideBounds(int x, int y) const;
 };
 #endif

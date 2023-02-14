@@ -4,7 +4,7 @@
 enum StatusCode {
     SUCCESS = 0,
     OUT_OF_BOUNDS = -1,
-    FAULTY = -2
+    PATH_NOT_FOUND = -2
 };
 
 #endif

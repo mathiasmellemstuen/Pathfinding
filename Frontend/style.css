@@ -1,0 +1,268 @@
+@charset "UTF-8";
+body {
+  background-color: #272936;
+  font-family: "Roboto", sans-serif;
+}
+
+#outer_container {
+  display: flex;
+  flex-direction: row;
+  margin: auto;
+  max-width: 120vh;
+}
+#outer_container #grid_container {
+  display: grid;
+  width: auto;
+  float: left;
+  grid-gap: 0;
+  grid-template-rows: repeat(var(--grid-rows), 2.5vh);
+  grid-template-columns: repeat(var(--grid-cols), 2.5vh);
+}
+#outer_container #grid_container .cell {
+  padding: 1em;
+  border: 1px solid #FFFFFE;
+  text-align: center;
+  scale: 1;
+  z-index: 0;
+  transition: 0.5s ease;
+  user-select: none;
+}
+#outer_container #grid_container .cell:hover {
+  background-color: #FFFFFE;
+  scale: 1.5;
+  z-index: 1;
+  transition: 0.2s ease;
+}
+#outer_container #grid_container:hover {
+  cursor: pointer;
+}
+#outer_container #side_panel {
+  position: relative;
+  color: #FFFFFE;
+  height: 80vh;
+  width: 200px;
+  margin-left: 2.5vh;
+  width: auto;
+  float: left;
+}
+#outer_container #side_panel h2 {
+  margin-top: 3px;
+  text-decoration: underline;
+  text-align: left;
+}
+#outer_container #side_panel h4 {
+  text-decoration: underline;
+  text-align: left;
+  margin: 3px;
+}
+#outer_container #side_panel #side_panel_inner_container {
+  padding: 10px;
+}
+#outer_container #side_panel .choice_container {
+  display: inline-block;
+  position: relative;
+  padding-left: 35px;
+  margin: 12px;
+  cursor: pointer;
+  font-size: 22px;
+  user-select: none;
+  border: 2px solid #272936;
+  transition: all 300ms ease-in;
+}
+#outer_container #side_panel .choice_container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+#outer_container #side_panel .choice_container .checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  background-color: #FFFFFE;
+  border-radius: 50%;
+  transition: all 300ms ease-in;
+}
+#outer_container #side_panel .choice_container:hover input ~ .checkmark {
+  background-color: #FFFFFE;
+}
+#outer_container #side_panel .choice_container input:checked ~ .checkmark {
+  background-color: #4062F6;
+}
+#outer_container #side_panel .choice_container:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+#outer_container #side_panel .choice_container input:checked ~ .checkmark:after {
+  display: block;
+}
+#outer_container #side_panel .choice_container .checkmark:after {
+  top: 9px;
+  left: 9px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #FFFFFE;
+}
+#outer_container #side_panel .choice_container:hover {
+  border: 2px solid #4062F6;
+  background-color: rgba(97, 154, 234, 0.16);
+}
+#outer_container #side_panel #media_button_container {
+  display: flex;
+  flex-direction: row;
+  border: 2px solid #FFFFFE;
+  margin-right: 12px;
+  margin-top: 12px;
+}
+#outer_container #side_panel #media_button_container .speed_number {
+  height: 40px;
+  line-height: 40px;
+  width: 50px;
+  font-size: 2em;
+  font-weight: bold;
+  border-radius: 50%;
+  background-color: #272936;
+  margin: 12px;
+  user-select: none;
+  text-align: center;
+}
+#outer_container #side_panel #media_button_container .round_button {
+  position: relative;
+  height: 40px;
+  line-height: 40px;
+  width: 40px;
+  font-size: 2em;
+  font-weight: bold;
+  border-radius: 50%;
+  background-color: #272936;
+  border: 2px solid #272936;
+  color: white;
+  text-align: center;
+  cursor: pointer;
+  user-select: none;
+  transition: all 300ms ease-in;
+  margin: 12px;
+}
+#outer_container #side_panel #media_button_container .round_button:hover {
+  background-color: #4062F6;
+  border: 2px solid #030303;
+}
+#outer_container #side_panel .erase_button {
+  height: 40px;
+  line-height: 40px;
+  width: 40px;
+  font-size: 2em;
+  font-weight: bold;
+  border-radius: 50%;
+  background-color: #68020F;
+  border: 2px solid #030303;
+  color: white;
+  text-align: center;
+  cursor: pointer;
+  user-select: none;
+  transition: all 300ms ease-in;
+  margin: 12px;
+}
+#outer_container #side_panel .erase_button:hover {
+  background-color: #F21137;
+  border: 2px solid #FFFFFE;
+}
+#outer_container #side_panel .round_button img, #outer_container #side_panel .erase_button img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80%;
+  color: #FFFFFE;
+}
+#outer_container #side_panel .erase_button {
+  position: relative;
+}
+#outer_container #side_panel .erase_button:hover img {
+  content: url("erase.svg");
+}
+#outer_container #side_panel .choose_algorithm_container {
+  display: flex;
+  flex-direction: row;
+}
+#outer_container #side_panel .choose_algorithm_container .select_container {
+  position: relative;
+  display: block;
+  max-width: 200px;
+  min-width: 100px;
+  margin-top: 12px;
+  margin-bottom: 12px;
+  border: 1px solid #FFFFFE;
+  background-color: #272936;
+  z-index: 10;
+  transition: all 300ms ease-in;
+}
+#outer_container #side_panel .choose_algorithm_container .select_container select {
+  border: none;
+  outline: none;
+  background: transparent;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border-radius: 0;
+  margin: 0;
+  display: block;
+  width: 100%;
+  padding: 12px 55px 15px 15px;
+  font-size: 14px;
+  color: #FFFFFE;
+  transition: all 300ms ease-in;
+}
+#outer_container #side_panel .choose_algorithm_container .select_container select:hover {
+  color: #030303;
+}
+#outer_container #side_panel .choose_algorithm_container .select_container:after {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 50px;
+  height: 100%;
+  line-height: 38px;
+  content: "∨";
+  text-align: center;
+  color: #FFFFFE;
+  font-size: 24px;
+  border-left: 1px solid #FFFFFE;
+  z-index: -1;
+}
+#outer_container #side_panel .choose_algorithm_container .select_container:hover {
+  border: 1px solid #FFFFFE;
+  background-color: #4062F6;
+}
+#outer_container #side_panel .choose_algorithm_container .rectangle_button {
+  display: inline-block;
+  padding-left: 10px;
+  padding-right: 10px;
+  text-align: center;
+  line-height: 38px;
+  margin-left: 12px;
+  margin-top: 12px;
+  margin-bottom: 12px;
+  border: 2px solid #FFFFFE;
+  cursor: pointer;
+  user-select: none;
+  transition: all 300ms ease-in;
+}
+#outer_container #side_panel .choose_algorithm_container .rectangle_button:hover {
+  border: 2px solid #030303;
+  background-color: #4062F6;
+}
+#outer_container #side_panel #bottom_text {
+  display: flex;
+  flex-direction: column;
+  color: rgb(197, 197, 197);
+  position: absolute;
+  bottom: 0%;
+  width: 100%;
+  text-align: right;
+}
+
+/*# sourceMappingURL=style.css.map */

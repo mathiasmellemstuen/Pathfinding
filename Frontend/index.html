@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="style.css">
+        <script type="text/javascript" src="index.js"></script>
+    </head>
+    <body>
+        <div id="outer_container">
+            <div id="grid_container"></div>
+            <div id="side_panel">
+                <div id="side_panel_inner_container">
+                    <h2>Pathfinder</h2>
+                    <p>Explore the different state-of-the-art pathfinding algorithms, and visualize how they work. (1) Build your map, (2) choose an algorithm, send it, and (3) replay the algorithm at your own pace.</p>
+                    <h4>1. Build map</h4>
+                    <label class="choice_container">Obstacle
+                        <input type="radio" id="obstacle" checked="checked" name ="cell_type" value="Obstacle">
+                        <span class="checkmark"></span>
+                    </label>
+                    <label class="choice_container">Start
+                        <input type="radio" id="start" name ="cell_type" value="Start">
+                        <span class="checkmark"></span>
+                    </label>
+                    <label class="choice_container">Goal
+                        <input type="radio" id="goal" name ="cell_type" value="Goal">
+                        <span class="checkmark"></span>
+                    </label>
+                    <label class="choice_container">Traversable
+                        <input type="radio" id="traversable" checked="checked" name ="cell_type" value="Traversable">
+                        <span class="checkmark"></span>
+                    </label>
+                    <h4>2. Choose algorithm and send</h4>
+                    <div class="choose_algorithm_container">
+                        <div class="select_container">
+                            <select>
+                                <option>Dijktra's algorithm</option>
+                                <option>A* (AStar) algorithm</option>
+                            </select>
+                        </div>
+                        <div class="rectangle_button" id="send_button">Send</div>
+                    </div>
+                    <h4>3. Replay control and playback speed</h4>
+                    <div class="choose_algorithm_container">
+                        <div id="media_button_container">
+                            <div class="round_button" id="revert_button">
+                                <img src="backward.svg"/>
+                            </div>
+                            <div class="round_button" id="resume_pause_button">
+                                <img src="pause.svg"/>
+                            </div>
+                            <div class="round_button" id="forward_button">
+                                <img src="forward.svg"/>
+                            </div>
+                        </div>
+                        <div id="media_button_container">
+                            <div class="round_button" id="lower_speed_button">-</div>
+                            <span class ="speed_number" id="speed_text">1</span>
+                            <div class="round_button" id="higher_speed_button">+</div>
+                        </div>
+                    </div>
+                    <h4>Erase map</h4>
+                    <div class="erase_button" id="erase_button">
+                        <img src="erase_black.svg"/>
+                    </div>
+                </div>
+                <span id="bottom_text"><span id="name">Mathias Mellemstuen</span><span id="version">Version 1.0</span></span>
+            </div>
+        </div>
+    </body>
+</html>

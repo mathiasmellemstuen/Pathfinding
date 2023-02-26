@@ -65,5 +65,5 @@ fn find_path(map: &str) -> String {
 
 #[launch]
 fn rocket() -> _ {
-    rocket::build().mount("/api", routes![find_path, map_info]).mount("/", FileServer::from("../Frontend"))
+    rocket::build().mount("/api", routes![find_path, map_info])
 }

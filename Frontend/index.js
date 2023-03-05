@@ -179,7 +179,8 @@ function send() {
         }
         full_data_str += "x" + ((_a = JSON.parse(key)) === null || _a === void 0 ? void 0 : _a.x) + "y" + ((_b = JSON.parse(key)) === null || _b === void 0 ? void 0 : _b.y) + "t" + value;
     }
-    fetch("api/find_path/" + full_data_str, { method: "GET" })
+    var algorithm_str = document.getElementById("algorithm_select").value;
+    fetch("api/find_path/" + algorithm_str + "/" + full_data_str, { method: "GET" })
         .then(function (response) { return response.json(); })
         .then(function (data) {
         var all_received_data = data;

@@ -3,8 +3,12 @@ use std::clone;
 use priority_queue::PriorityQueue; 
 use std::collections::binary_heap; 
 
+pub enum HeuristicType {
+    NONE = 0,
+    EUCLIDIAN = 1
+}
 
-pub fn find_path(from: (usize, usize), to: (usize, usize), map: [usize; crate::FULL_SIZE]) -> (Vec<(usize, usize)>, Vec<usize>) {
+pub fn find_path(from: (usize, usize), to: (usize, usize), map: [usize; crate::FULL_SIZE], heuristic_type: HeuristicType) -> (Vec<(usize, usize)>, Vec<usize>) {
 
     let mut path : Vec<usize> = Vec::new();
     let mut progress_recording : Vec<(usize, usize)> = Vec::new();
@@ -21,7 +25,7 @@ pub fn find_path(from: (usize, usize), to: (usize, usize), map: [usize; crate::F
 
     let mut priority_queue: PriorityQueue<usize, usize> = PriorityQueue::new(); 
 
-    priority_queue.push(from_index, usize::MAX); 
+    priority_queue.push(from_index, usize::MAX);
 
     while priority_queue.is_empty() == false {
 
@@ -62,7 +66,12 @@ pub fn find_path(from: (usize, usize), to: (usize, usize), map: [usize; crate::F
                 continue; 
             }
 
-            let new_neighbour_distance = current_distance - 1;
+            let (neighbour_x, neighbour_y) = crate::convert_dimensions::convert_1D_to_2D(neighbour_index);
+
+
+            // If the heuristic is 0, then algorithm is dijktras algorithm. Dijktras algorithm is a special case of Astar algorithm where the heuristic is 0. 
+            let heuristic : usize = if matches!(heuristic_type, HeuristicType::EUCLIDIAN) {f32::sqrt(((to.0 as f32) - (neighbour_x as f32)).powi(2) + ((to.1 as f32) - (neighbour_y as f32)).powi(2)) as usize} else {0};
+            let new_neighbour_distance = current_distance - 1 - heuristic;
 
             if new_neighbour_distance < distances[neighbour_index] {
 

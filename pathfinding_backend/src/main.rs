@@ -15,16 +15,17 @@ mod inside_bounds;
 mod map;
 mod convert_dimensions;
 mod get_neighbours;
-mod dijktras;
+mod astar;
 
 
 #[get("/map_info")]
 fn map_info() -> String {
     format!(r#"{{ "width":{WIDTH}, "height":{HEIGHT}}}"#)
 }
-#[get("/find_path/<map>")]
-fn find_path(map: &str) -> String {
+#[get("/find_path/<algorithm>/<map>")]
+fn find_path(algorithm: &str, map: &str) -> String {
 
+    let final_algorithm = if algorithm == "dijktras" {"dijktras"} else {"astar"};
     let final_map = map::create_map(String::from(map));
 
     if final_map.is_ok() {
@@ -33,10 +34,11 @@ fn find_path(map: &str) -> String {
         let end_result = find_type_t_on_map(final_map.unwrap(), crate::ENDPOINT);
 
         if start_result.is_ok() && end_result.is_ok() {
-    
-            let (progress_recording, path) = dijktras::find_path(start_result.unwrap(), end_result.unwrap(), final_map.unwrap());
 
-            let mut return_str = format!(r#"{{"recording":["#); 
+            // Using Astar for both dijktras and astar algorithm input (dijktras is a special case of Astar with no heuristic).
+            let (progress_recording, path) = astar::find_path(start_result.unwrap(), end_result.unwrap(), final_map.unwrap(), if final_algorithm == "dijktras" {astar::HeuristicType::NONE} else {astar::HeuristicType::EUCLIDIAN});
+
+            let mut return_str = format!(r#"{{"recording":["#);
 
             for (current, neighbour) in progress_recording {
                 
@@ -65,5 +67,5 @@ fn find_path(map: &str) -> String {
 
 #[launch]
 fn rocket() -> _ {
-    rocket::build().mount("/api", routes![find_path, map_info])
+    rocket::build().mount("/api", routes![find_path, map_info]).mount("/", FileServer::from("../Frontend"))
 }

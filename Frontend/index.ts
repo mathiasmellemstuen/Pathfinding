@@ -29,8 +29,6 @@ interface RecordingSample {
 
 interface RecordingSample extends Array<RecordingSample>{}
 interface Position extends Array<Position>{}
-
-
 interface AllReceivedData {
     path: Array<Position>,
     recording: Array<RecordingSample>
@@ -247,7 +245,9 @@ function send() {
         full_data_str +="x" + JSON.parse(key)?.x + "y" + JSON.parse(key)?.y + "t" + value;
     }
 
-    fetch("api/find_path/" + full_data_str, { method: "GET"})
+    let algorithm_str = (document.getElementById("algorithm_select") as HTMLSelectElement).value;
+    
+    fetch("api/find_path/" + algorithm_str + "/" + full_data_str, { method: "GET"})
     .then((response) => response.json())
     .then((data) => {
 
